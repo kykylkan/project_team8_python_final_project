@@ -64,7 +64,7 @@ class Record:
 
 
 
-    def __str__(self):
-        birthday_str = f", birthday: {self.birthday.value}" if self.birthday else ""
-        email_str = f", email: {self.email.value}" if self.email else ""
+    def __repr__(self):
+        birthday_str = f", birthday: {self.birthday.value}" if self.birthday else f", birthday: -- "
+        email_str = f", email: {self.email.value}" if self.email else "f, email: -- "
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}{birthday_str}{email_str}"

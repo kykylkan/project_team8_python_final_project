@@ -1,5 +1,7 @@
 from functionality import parse_input, remove_record, add_contact, change_number, show_phones, remove_phone, show_all, add_birthday, show_birthday, show_reminder, save_data, load_data, add_email
-
+from markup import create_markup, table_data, header
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
 
 def main(): 
     '''
@@ -7,11 +9,12 @@ def main():
 
     Accepts commands from the user and executes them.
     '''
-
+    commands = ['close', 'close', 'hello', 'help', 'add', 'rm_contact', 'rm_phone', 'change', 'find_phone', 'all', 'add_email', 'add_birthday', 'show_birthday', 'reminder']
+    command_completer = WordCompleter(commands, ignore_case=True)
     book = load_data()
-    print("Welcome to the assistant bot!")
+    print("\nWelcome to the assistant bot!")
     while True:
-        user_input = input("Enter a command: ")
+        user_input = prompt("\nEnter a command: ", completer=command_completer)
 
         command, *args = parse_input(user_input)
 
@@ -24,6 +27,10 @@ def main():
         elif command == "hello":
             print("How can I help you?")        
 
+
+        elif command == "help":   
+            print("\n" * 1)               
+            print(create_markup(header, table_data))
 
         elif command == "add":                  
             print(add_contact(args, book))  
@@ -39,7 +46,7 @@ def main():
         elif command == "change":               
             print(change_number(args, book))  
 
-        elif command == "phone":               
+        elif command == "find_phone":               
             print(show_phones(args[0], book))
 
         elif command == "all":                  
@@ -49,13 +56,13 @@ def main():
         elif command == 'add_email':
             print(add_email(args, book))
 
-        elif command == "add-birthday":         
+        elif command == "add_birthday":         
             print(add_birthday(args, book))
 
-        elif command == "show-birthday":        
+        elif command == "show_birthday":        
             print(show_birthday(args[0], book))
 
-        elif command == "birthdays":         
+        elif command == "reminder":         
             print(show_reminder(book))
 
 
