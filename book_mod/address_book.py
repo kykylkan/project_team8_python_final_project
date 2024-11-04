@@ -33,7 +33,7 @@ class AddressBook(UserDict):
         """
         today = datetime.today().date()
         reminder = []
-
+        
         for contact in self.data.values():
             birthday = contact.birthday
             if birthday != None:

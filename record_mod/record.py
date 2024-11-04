@@ -1,8 +1,8 @@
 
-from email_mod.email import Email
-from name_mod.name import Name
-from check_phone.phone import Phone
-from birthday_mod.birthday import Birthday
+from check_classes.email import Email
+from check_classes.name import Name
+from check_classes.phone import Phone
+from check_classes.birthday import Birthday
 
 
 class Record: 
@@ -51,7 +51,7 @@ class Record:
     def add_email(self, email):
         emails = Email(email)
         if emails.check_email():
-            self.email = emails  # Зберігаємо об'єкт Email у self.email
+            self.email = emails  
             print(f"Email {email} added.")
         else:
             print("Invalid email format.")

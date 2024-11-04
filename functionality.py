@@ -1,7 +1,7 @@
-from email_mod.email import Email
+from check_classes.email import Email
 from record_mod.record import Record
-from birthday_mod.birthday import Birthday
-from book.address_book import AddressBook
+from check_classes.birthday import Birthday
+from book_mod.address_book import AddressBook
 import pickle
 
 def input_error(func):
@@ -85,9 +85,7 @@ def remove_phone(args, book: AddressBook):
                 record.remove_phone(phone)
                 return f'phone "{phone}" is delete'
             else: 
-                return f'phone "{phone}" is not defined'
-        
-        
+                return f'phone "{phone}" is not defined'       
 
 
 @input_error
