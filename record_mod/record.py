@@ -1,4 +1,4 @@
-
+from colorama import Fore, Back, Style
 from check_classes.email import Email
 from check_classes.name import Name
 from check_classes.phone import Phone
@@ -17,9 +17,9 @@ class Record:
         phone = Phone(phone_number)
         if phone.check_phone():
             self.phones.append(phone)
-            print(f"Phone {phone_number} added.")
+            print(f"✅   {Fore.GREEN}Phone {phone_number} added.{Style.RESET_ALL}")
         else:
-            print("Failed to add phone due to invalid format.")
+            print(f"⛔️   {Fore.RED}Failed to add phone due to invalid format.{Style.RESET_ALL}")
             return None        
 
     def remove_phone(self, phone_number):
@@ -34,10 +34,11 @@ class Record:
             if phone.value == old_phone:
                 if Phone(new_phone).check_phone():
                     self.phones[index] = Phone(new_phone)
-                    return f"Phone {old_phone} changed to {new_phone}"
+            
+                    return f"✅   {Fore.GREEN}Phone {old_phone} changed to {new_phone}{Style.RESET_ALL}"
             else:
-                return f"Phone {old_phone} not found"
-    
+                return f"⛔️   {Fore.RED}Phone {old_phone} not found. {new_phone}{Style.RESET_ALL}"
+            
 
     def find_phone(self, phone_number):
         try:
@@ -45,16 +46,18 @@ class Record:
                 if phone.value == phone_number:
                     return phone.value
         except ValueError as e:
-            print(e)
+            print( f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
+                )
 
 
     def add_email(self, email):
         emails = Email(email)
         if emails.check_email():
             self.email = emails  
-            print(f"Email {email} added.")
+            print(f"✅   {Fore.GREEN}Email {email} added.{Style.RESET_ALL}")
         else:
-            print("Invalid email format.")
+            print(f"⛔️   {Fore.RED}Invalid email format.{Style.RESET_ALL}")
+
 
            
     def add_birthday(self, birthday_value):

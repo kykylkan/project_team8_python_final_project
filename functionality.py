@@ -2,6 +2,8 @@ from check_classes.email import Email
 from record_mod.record import Record
 from check_classes.birthday import Birthday
 from book_mod.address_book import AddressBook
+from colorama import Fore, Back, Style
+
 import pickle
 
 def input_error(func):
@@ -19,13 +21,13 @@ def input_error(func):
         try:
             return func(*args, **kwargs)
         except KeyError as e:
-            return e
+            return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
         except ValueError as e:
-            return e
+            return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
         except IndexError as e:
-            return e
+            return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
         except Exception as e:
-            return f'An unexpected error occurred: {e}. Please try again.'
+            return f"⛔️   {Fore.RED}An unexpected error occurred: {e}. Please try again.{Style.RESET_ALL}"
     return inner
 
 
@@ -34,17 +36,16 @@ def parse_input(user_input):
     cmd = cmd.strip().lower()
     return cmd, *args
 
-
-
+ 
 @input_error
 def add_contact(args, book: AddressBook):
     name, phone, *_ = args
     record = book.find(name)
-    message = "Contact updated."
+    message = f"✅   {Fore.GREEN}Contact updated.{Style.RESET_ALL}"
     if record is None:
         record = Record(name)
         book.add_record(record)
-        message = "Contact added."
+        message = f"✅   {Fore.GREEN}Contact added.{Style.RESET_ALL}"
     if phone:
         record.add_phone(phone)
     return message
@@ -56,14 +57,14 @@ def remove_record(args, book: AddressBook):
     record = book.find(name)
     if record:
         book.delete(name)
-        return f'Contact with name "{name}" is deleted'
+        return f'✅   {Fore.GREEN}Contact with name "{name}" is deleted.{Style.RESET_ALL}'
 
 @input_error
 def change_number(args, book: AddressBook):
     name, old_phone, new_phone, *_ = args
     record = book.find(name)
     if record is None:
-        return "Contact not found."
+        return f"⛔️   {Fore.RED}Contact with name {name}not found.{Style.RESET_ALL}"
     return record.edit_phone(old_phone, new_phone)
 
 
@@ -72,7 +73,7 @@ def show_phones(name, book: AddressBook):
     record = book.find(name)
     if record:
         phones = [phone.value for phone in record.phones]
-        return f'numbers of name {name} is {phones}'
+        return f'✅   {Fore.GREEN}numbers of name {name} is {phones}.{Style.RESET_ALL}'
     
 @input_error
 def remove_phone(args, book: AddressBook):
@@ -83,9 +84,9 @@ def remove_phone(args, book: AddressBook):
         for el in record.phones:
             if el.value == phone:
                 record.remove_phone(phone)
-                return f'phone "{phone}" is delete'
+                return f'✅   {Fore.GREEN}phone "{phone}" is delete.{Style.RESET_ALL}'
             else: 
-                return f'phone "{phone}" is not defined'       
+                return f"⛔️   {Fore.RED}phone {phone} is not defined.{Style.RESET_ALL}"
 
 
 @input_error
@@ -95,7 +96,7 @@ def show_all(book: AddressBook):
     if result:
         return result
     else:
-        return "Book is empty"
+        return f"⛔️   {Fore.RED}Book is empty.{Style.RESET_ALL}"
 
 @input_error
 def add_email(args, book: AddressBook):
@@ -103,8 +104,7 @@ def add_email(args, book: AddressBook):
     record = book.find(name)
     if Email(email):
         record.add_email(email)
-        return f'{email} added for name {name}'
-
+        return f'✅   {Fore.GREEN}{email} added for name {name}.{Style.RESET_ALL}'
 
 
 @input_error
@@ -113,21 +113,24 @@ def add_birthday(args, book: AddressBook):
     record = book.find(name)
     if Birthday(birthday_date):
         record.add_birthday(birthday_date)
-        return f'{birthday_date} added for name {name}'
+        return f'✅   {Fore.GREEN}{birthday_date} added for name {name}.{Style.RESET_ALL}'
+
 
 @input_error
 def show_birthday(name, book: AddressBook):
     record = book.find(name)
     if record:
         birthday = record.birthday.value
-        return f'Birthday of {name} is {birthday}'
-    return f'Birthday of {name} is not found'    
+        return f'✅   {Fore.GREEN}Birthday of {name} is {birthday}.{Style.RESET_ALL}'
+    return f"⛔️   {Fore.RED}Birthday of {name} is not found.{Style.RESET_ALL}"
+   
 
 @input_error
 def show_reminder(book):
     if book.get_upcoming_birthdays():
         return book.get_upcoming_birthdays()
-    return 'No reminders for this week'
+    return f"⛔️   {Fore.RED}No reminders for this week.{Style.RESET_ALL}"
+
 
 @input_error
 def save_data(book, filename="addressbook.pkl"):

@@ -1,5 +1,6 @@
 from datetime import datetime, date, timedelta
 from collections import UserDict
+from colorama import Fore, Style
 
 
 
@@ -13,7 +14,8 @@ class AddressBook(UserDict):
         if name in self.data:
             return self.data[name]
         else:
-            print(f'Contact with name "{name}" not found')
+            print(f"⛔️   {Fore.RED}Contact with name {name}not found.{Style.RESET_ALL}")
+
             return None
 
 
@@ -22,7 +24,7 @@ class AddressBook(UserDict):
             del self.data[name]
             
         else:
-            print(f'Contact with name "{name}" not found')
+            print(f"⛔️   {Fore.RED}Contact with name {name}not found.{Style.RESET_ALL}")
 
 
     def get_upcoming_birthdays(self):

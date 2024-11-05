@@ -2,6 +2,17 @@ from functionality import parse_input, remove_record, add_contact, change_number
 from markup import create_markup, table_data, header
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
+from prompt_toolkit.styles import Style as prompt_style
+from colorama import Fore, Back, Style
+
+style = prompt_style.from_dict({
+    'prompt': 'fg:#003366 bg:#A7DFF7 bold',            
+    'completion-menu': 'bg:#B3E0F7',                    
+    'completion-menu.selected': 'bg:#E0F7FA fg:#003366',  
+    'completion-menu.completions': 'fg:#003366',        
+})
+
+
 
 def main(): 
     '''
@@ -9,12 +20,15 @@ def main():
 
     Accepts commands from the user and executes them.
     '''
-    commands = ['close', 'close', 'hello', 'help', 'add', 'rm_contact', 'rm_phone', 'change', 'find_phone', 'all', 'add_email', 'add_birthday', 'show_birthday', 'reminder']
+    commands = ['close', 'close', 'hello', 'help', 'add', 'del_contact', 'del_phone', 'change', 'find_phone', 'all', 'add_email', 'add_birthday', 'show_birthday', 'reminder']
     command_completer = WordCompleter(commands, ignore_case=True)
     book = load_data()
-    print("\nWelcome to the assistant bot!")
+    print(f"\nWelcome to the ASSISTANT BOT! 🤖")
+
     while True:
-        user_input = prompt("\nEnter a command: ", completer=command_completer)
+        print(f"\n " * 2)               
+        user_input = user_input = prompt('Enter a command: >>> ', style=style, completer=command_completer)
+        print("\n " * 2)               
 
         command, *args = parse_input(user_input)
 
@@ -29,17 +43,17 @@ def main():
 
 
         elif command == "help":   
-            print("\n" * 1)               
+            print("\n")               
             print(create_markup(header, table_data))
 
         elif command == "add":                  
             print(add_contact(args, book))  
 
-        elif command == "rm_contact":                  
+        elif command == "del_contact":                  
             print(remove_record(args, book))  
 
 
-        elif command == "rm_phone":                  
+        elif command == "del_phone":                  
             print(remove_phone(args, book))  
 
 
@@ -67,13 +81,13 @@ def main():
 
 
         else:
-            print("Invalid command.")
+            print(f"⛔️   {Fore.RED}Invalid command.{Style.RESET_ALL}")
 
 
 
 if __name__ == "__main__":
     main()
 
-#   add_email roman rstrizhko1994@gmail.comad
+
 
 
