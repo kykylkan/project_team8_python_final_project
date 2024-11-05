@@ -54,20 +54,21 @@ class Record:
         emails = Email(email)
         if emails.check_email():
             self.email = emails  
-            print(f"✅   {Fore.GREEN}Email {email} added.{Style.RESET_ALL}")
+            return f"✅   {Fore.GREEN}Email {email} added.{Style.RESET_ALL}"
         else:
-            print(f"⛔️   {Fore.RED}Invalid email format.{Style.RESET_ALL}")
+            return f"⛔️   {Fore.RED}Invalid email format.{Style.RESET_ALL}"
 
 
            
     def add_birthday(self, birthday_value):
-        birthday = Birthday(birthday_value)
+        birthday = Birthday(birthday_value).check_birthday()
         if birthday:
             self.birthday = birthday
+            print(self.birthday)
 
 
 
     def __repr__(self):
-        birthday_str = f", birthday: {self.birthday.value}" if self.birthday else f", birthday: -- "
-        email_str = f", email: {self.email.value}" if self.email else "f, email: -- "
+        birthday_str = f", birthday: {self.birthday.strftime('%d.%m.%Y')}" if self.birthday else ", birthday: -- "
+        email_str = f", email: {self.email.value}" if self.email else ",  email: -- "
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}{birthday_str}{email_str}"

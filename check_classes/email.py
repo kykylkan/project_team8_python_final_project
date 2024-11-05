@@ -10,4 +10,7 @@ class Email(Field):
     def check_email(self):
         pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         res = re.match(pattern, self.value) 
-        return res
+        if res is None:
+            return False        
+        else:
+            return True

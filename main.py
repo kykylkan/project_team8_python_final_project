@@ -1,4 +1,4 @@
-from functionality import parse_input, remove_record, add_contact, change_number, show_phones, remove_phone, show_all, add_birthday, show_birthday, show_reminder, save_data, load_data, add_email
+from functionality import parse_input, input_error, remove_record, add_contact, change_number, show_phones, remove_phone, show_all, add_birthday, show_birthday, show_reminder, save_data, load_data, add_email
 from markup import create_markup, table_data, header
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
@@ -6,8 +6,8 @@ from prompt_toolkit.styles import Style as prompt_style
 from colorama import Fore, Back, Style
 
 style = prompt_style.from_dict({
-    'prompt': 'fg:#003366 bg:#A7DFF7 bold',            
-    'completion-menu': 'bg:#B3E0F7',                    
+    'prompt': 'fg:#003366  bold',            
+    'completion-menu': 'bg:#045160',                    
     'completion-menu.selected': 'bg:#E0F7FA fg:#003366',  
     'completion-menu.completions': 'fg:#003366',        
 })
@@ -28,6 +28,7 @@ def main():
     while True:
         print(f"\n " * 2)               
         user_input = user_input = prompt('Enter a command: >>> ', style=style, completer=command_completer)
+
         print("\n " * 2)               
 
         command, *args = parse_input(user_input)
@@ -78,7 +79,6 @@ def main():
 
         elif command == "reminder":         
             print(show_reminder(book))
-
 
         else:
             print(f"⛔️   {Fore.RED}Invalid command.{Style.RESET_ALL}")

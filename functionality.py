@@ -30,7 +30,7 @@ def input_error(func):
             return f"⛔️   {Fore.RED}An unexpected error occurred: {e}. Please try again.{Style.RESET_ALL}"
     return inner
 
-
+@input_error
 def parse_input(user_input):
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
@@ -103,17 +103,20 @@ def add_email(args, book: AddressBook):
     name, email = args
     record = book.find(name)
     if Email(email):
-        record.add_email(email)
-        return f'✅   {Fore.GREEN}{email} added for name {name}.{Style.RESET_ALL}'
+        return record.add_email(email)
 
 
 @input_error
 def add_birthday(args, book: AddressBook):
     name, birthday_date = args
     record = book.find(name)
-    if Birthday(birthday_date):
-        record.add_birthday(birthday_date)
-        return f'✅   {Fore.GREEN}{birthday_date} added for name {name}.{Style.RESET_ALL}'
+
+    try:
+        record.add_birthday(birthday_date)  
+        return f'✅ {Fore.GREEN}{birthday_date} added for name {name}.{Style.RESET_ALL}'
+    except ValueError as e:
+        return f'⛔️ {e}'
+
 
 
 @input_error

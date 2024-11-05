@@ -27,6 +27,8 @@ class AddressBook(UserDict):
             print(f"⛔️   {Fore.RED}Contact with name {name}not found.{Style.RESET_ALL}")
 
 
+
+
     def get_upcoming_birthdays(self):
         """
         Returns a list of contacts with birthdays in the next 7 days.
@@ -39,9 +41,9 @@ class AddressBook(UserDict):
         for contact in self.data.values():
             birthday = contact.birthday
             if birthday != None:
-                birthday_this_year = date(today.year, birthday.value.month, birthday.value.day)
+                birthday_this_year = date(today.year, birthday.month, birthday.day)
                 if birthday_this_year < today:
-                    birthday_this_year = date(today.year + 1, birthday.value.month, birthday.value.day)
+                    birthday_this_year = date(today.year + 1, birthday.month, birthday.day)
                 days_until_birthday = (birthday_this_year - today).days
 
                 if days_until_birthday <= 7:
