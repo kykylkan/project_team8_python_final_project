@@ -7,7 +7,7 @@ from colorama import Fore, Style
 class AddressBook(UserDict):
     def add_record(self, record):
         self.data[record.name.value] = record
-        print(f'Contact {record.name} added' )
+        print(f"✅   {Fore.GREEN}Contact {record.name} added.{Style.RESET_ALL}")
 
 
     def find(self, name):
