@@ -41,14 +41,12 @@ def parse_input(user_input):
 def add_contact(args, book: AddressBook):
     name, phone, *_ = args
     record = book.find(name)
-    message = f"✅   {Fore.GREEN}Contact updated.{Style.RESET_ALL}"
     if record is None:
         record = Record(name)
         book.add_record(record)
-        message = f"✅   {Fore.GREEN}Contact added.{Style.RESET_ALL}"
     if phone:
-        record.add_phone(phone)
-    return message
+        return record.add_phone(phone)
+
 
 
 @input_error

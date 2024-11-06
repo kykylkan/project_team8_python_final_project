@@ -21,7 +21,7 @@ table_data = [
     [f"{Fore.LIGHTCYAN_EX}add_email{Style.RESET_ALL}", "Adds email to contact"],
     [f"{Fore.LIGHTCYAN_EX}add_birthday{Style.RESET_ALL}", "Adds birthday to contact"],
     [f"{Fore.LIGHTCYAN_EX}show_birthday{Style.RESET_ALL}", "Finds a birthday by name"],
-    [f"{Fore.LIGHTCYAN_EX}birthdays{Style.RESET_ALL}", "Birthdays for the next week"],
+    [f"{Fore.LIGHTCYAN_EX}reminder{Style.RESET_ALL}", "Birthdays for the next week"],
     ["--------------", "----------------------------"],
     [f"{Fore.LIGHTCYAN_EX}close, exit{Style.RESET_ALL}", "Close and exit"],
 ]

@@ -17,10 +17,10 @@ class Record:
         phone = Phone(phone_number)
         if phone.check_phone():
             self.phones.append(phone)
-            print(f"✅   {Fore.GREEN}Phone {phone_number} added.{Style.RESET_ALL}")
+            return f"✅   {Fore.GREEN}Phone {phone_number} added.{Style.RESET_ALL}"
         else:
-            print(f"⛔️   {Fore.RED}Failed to add phone due to invalid format.{Style.RESET_ALL}")
-            return None        
+            return f"⛔️   {Fore.RED}Failed to add phone due to invalid format.{Style.RESET_ALL}"
+
 
     def remove_phone(self, phone_number):
         for phone in self.phones:
