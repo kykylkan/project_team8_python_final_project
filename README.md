@@ -1,6 +1,6 @@
 
 <a id="top"></a>
-# [Асистент Бот](https://github.com/ВАШ-РЕПОЗИТОРІЙ)
+# [Асистент Бот](https://github.com/kykylkan/project_team8_python_final_project)
 
 <a href="#1"><img src="https://img.shields.io/badge/Опис Проeкту-512BD4?style=for-the-badge"/></a> <a href="#2"><img src="https://img.shields.io/badge/Функції-ECD53F?style=for-the-badge"/></a> <a href="#3"><img src="https://img.shields.io/badge/Підготовка до роботи-007054?style=for-the-badge"/></a> <a href="#4"><img src="https://img.shields.io/badge/Застосовані технології-A9225C?style=for-the-badge"/></a>
 
@@ -12,7 +12,7 @@ ___
 
 ## <img src="https://img.shields.io/badge/Опис Проeкту-512BD4?style=for-the-badge"/>
 
-[__Асистент Бот__](https://github.com/kykylkan/project_team8_python_final_project/edit/main) — це бот, розроблений для автоматизації управління контактами, нагадування про дні народження та надання інших корисних функцій, що спрощують роботу з особистими даними користувача.
+[__Асистент Бот__](https://github.com/kykylkan/project_team8_python_final_project) — це бот, розроблений для автоматизації управління контактами, нагадування про дні народження та надання інших корисних функцій, що спрощують роботу з особистими даними користувача.
 
 Мета проекту — створити інтуїтивний інструмент, який допомагає керувати записами в адресній книзі, зберігати номери телефонів і нагадувати про важливі події. Бот зручно інтегрується в повсякденне життя та дозволяє заощадити час користувача.
 
