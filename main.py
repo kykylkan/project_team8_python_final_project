@@ -110,12 +110,6 @@ def main():
         elif command == "add_birthday":
             print(add_birthday(args, book))
 
-        elif command == "show_birthday":
-            print(show_birthday(args[0], book))
-
-        elif command == "reminder":
-            print(show_reminder(book))
-
         elif command == "birthdays":
             print(show_reminder(book, args.pop() if len(args) else 0))
 
