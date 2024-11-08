@@ -21,7 +21,7 @@ def main():
 
     Accepts commands from the user and executes them.
     '''
-    commands = ['close', 'exit', 'hello', 'help', 'add', 'del_contact', 'del_phone', 'change', 'find_phone', 'all', 'add_email', 'add_birthday', 'show_birthday', 'reminder', 'add-note', 'all-notes', 'search-notes', 'delete-note']
+    commands = ['help', 'hello', 'add_contact', 'del_contact', 'del_phone', 'change_number', 'find_phone', 'all_contacts', 'add_email', 'add_birthday', 'show_birthday', 'reminder', 'add-note', 'all-notes', 'search-notes', 'delete-note', 'close', 'exit', ]
     command_completer = WordCompleter(commands, ignore_case=True)
     book = load_data()
     notes_manager = load_notes()
@@ -29,7 +29,8 @@ def main():
 
     while True:
         print(f"\n " * 2)               
-        user_input = user_input = prompt('Enter a command: >>> ', style=style, completer=command_completer)
+        user_input = prompt('Enter a command: >>> ', style=style, completer=command_completer)
+
 
         print("\n " * 2)               
 
@@ -50,7 +51,7 @@ def main():
             print("\n")               
             print(create_markup(header, table_data))
 
-        elif command == "add":                  
+        elif command == "add_contact":                  
             print(add_contact(args, book))  
 
         elif command == "del_contact":                  
@@ -61,13 +62,14 @@ def main():
             print(remove_phone(args, book))  
 
 
-        elif command == "change":               
+        elif command == "change_number":               
             print(change_number(args, book))  
 
         elif command == "find_phone":               
             print(show_phones(args[0], book))
+            break
 
-        elif command == "all":                  
+        elif command == "all_contacts":                  
             print(show_all(book))
 
 

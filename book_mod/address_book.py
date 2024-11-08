@@ -14,8 +14,7 @@ class AddressBook(UserDict):
         if name in self.data:
             return self.data[name]
         else:
-            print(f"⛔️   {Fore.RED}Contact with name {name}not found.{Style.RESET_ALL}")
-
+            print(f"⛔️   {Fore.RED}Contact with name {name} not found.{Style.RESET_ALL}")
             return None
 
 
