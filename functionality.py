@@ -23,7 +23,7 @@ def input_error(func):
         except KeyError as e:
             return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
         except ValueError as e:
-            return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
+            return f"⛔️   {Fore.RED}Give me the correct data please.{Style.RESET_ALL}"
         except IndexError as e:
             return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
         except Exception as e:
