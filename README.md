@@ -53,7 +53,7 @@ source .venv/bin/activate
 #### Windows
 ```bash
 python -m venv .venv
-.venv\Scriptsctivate
+.venv\Scripts\activate
 ```
 
 > **Примітка:** Щоб вийти з віртуального середовища, скористайтесь командою `deactivate`.
