@@ -23,6 +23,11 @@ table_data = [
     [f"{Fore.LIGHTCYAN_EX}show_birthday{Style.RESET_ALL}", "Finds a birthday by name"],
     [f"{Fore.LIGHTCYAN_EX}reminder{Style.RESET_ALL}", "Birthdays for the next week"],
     ["--------------", "----------------------------"],
+    [f"{Fore.LIGHTCYAN_EX}add-note{Style.RESET_ALL}", "Add a new note"],
+    [f"{Fore.LIGHTCYAN_EX}all-notes{Style.RESET_ALL}", "Show all notes"],
+    [f"{Fore.LIGHTCYAN_EX}search-notes{Style.RESET_ALL}", "Search notes"],
+    [f"{Fore.LIGHTCYAN_EX}delete-note{Style.RESET_ALL}", "Delete a note"],
+    ["--------------", "----------------------------"],
     [f"{Fore.LIGHTCYAN_EX}close, exit{Style.RESET_ALL}", "Close and exit"],
 ]
 

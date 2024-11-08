@@ -4,6 +4,7 @@ from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.styles import Style as prompt_style
 from colorama import Fore, Back, Style
+from note_mod import NotesManager, save_notes, load_notes
 
 style = prompt_style.from_dict({
     'prompt': 'fg:#003366  bold',            
@@ -20,9 +21,10 @@ def main():
 
     Accepts commands from the user and executes them.
     '''
-    commands = ['close', 'close', 'hello', 'help', 'add', 'del_contact', 'del_phone', 'change', 'find_phone', 'all', 'add_email', 'add_birthday', 'show_birthday', 'reminder']
+    commands = ['close', 'exit', 'hello', 'help', 'add', 'del_contact', 'del_phone', 'change', 'find_phone', 'all', 'add_email', 'add_birthday', 'show_birthday', 'reminder', 'add-note', 'all-notes', 'search-notes', 'delete-note']
     command_completer = WordCompleter(commands, ignore_case=True)
     book = load_data()
+    notes_manager = load_notes()
     print(f"\nWelcome to the ASSISTANT BOT! 🤖")
 
     while True:
@@ -35,6 +37,7 @@ def main():
 
         if command in ["close", "exit"]:
             save_data(book)
+            save_notes(notes_manager)
             print("Good bye!")
             break
 
@@ -79,6 +82,28 @@ def main():
 
         elif command == "reminder":         
             print(show_reminder(book))
+
+        # Notes commands
+        elif command == "add-note":
+            author = input("Enter author of the note: ")
+            title = input("Enter note title: ")
+            text = input("Enter note text: ")
+            tags = input("Enter tags (comma-separated) or press enter to skip: ")
+            print(notes_manager.add_note(author, title, text, tags))
+            save_notes(notes_manager)
+
+        elif command == "all-notes":
+            print(notes_manager.show_all_notes())
+
+        elif command == "search-notes":
+            search_term = input("Enter search term: ")
+            print(notes_manager.search_notes(search_term))
+
+        elif command == "delete-note":
+            print(notes_manager.show_all_notes())
+            idx = input("Enter the number of the note to delete: ")
+            print(notes_manager.delete_note(idx))
+            save_notes(notes_manager)
 
         else:
             print(f"⛔️   {Fore.RED}Invalid command.{Style.RESET_ALL}")
