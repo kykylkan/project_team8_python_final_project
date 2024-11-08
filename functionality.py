@@ -138,9 +138,8 @@ def show_birthday(name, book: AddressBook):
 
 
 @input_error
-def show_reminder(args, book: AddressBook):
-    days, *_ = args
-    birthdays = book.get_upcoming_birthdays(int(days or 7))
+def show_reminder(book: AddressBook, days = 7):
+    birthdays = book.get_upcoming_birthdays(int(days))
 
     if len(birthdays):
         return birthdays

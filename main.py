@@ -117,7 +117,7 @@ def main():
             print(show_reminder(book))
 
         elif command == "birthdays":
-            print(show_reminder(args, book))
+            print(show_reminder(book, args.pop() if len(args) else 0))
 
         # Notes commands
         elif command == "add-note":
