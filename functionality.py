@@ -6,16 +6,16 @@ from colorama import Fore, Back, Style
 
 import pickle
 
+
 def input_error(func):
-    '''
+    """
     Decorator for handling errors in command processing functions.
     Parameters:
     func (function): The function to which the decorator is applied.
 
     Returns:
     function: Internal function that handles errors
-    '''
-
+    """
 
     def inner(*args, **kwargs):
         try:
@@ -28,7 +28,9 @@ def input_error(func):
             return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
         except Exception as e:
             return f"⛔️   {Fore.RED}An unexpected error occurred: {e}. Please try again.{Style.RESET_ALL}"
+
     return inner
+
 
 @input_error
 def parse_input(user_input):
@@ -36,7 +38,7 @@ def parse_input(user_input):
     cmd = cmd.strip().lower()
     return cmd, *args
 
- 
+
 @input_error
 def add_contact(args, book: AddressBook):
     name, phone, *_ = args
@@ -48,14 +50,16 @@ def add_contact(args, book: AddressBook):
         return record.add_phone(phone)
 
 
-
 @input_error
 def remove_record(args, book: AddressBook):
-    name, *_ = args 
+    name, *_ = args
     record = book.find(name)
     if record:
         book.delete(name)
-        return f'✅   {Fore.GREEN}Contact with name "{name}" is deleted.{Style.RESET_ALL}'
+        return (
+            f'✅   {Fore.GREEN}Contact with name "{name}" is deleted.{Style.RESET_ALL}'
+        )
+
 
 @input_error
 def change_number(args, book: AddressBook):
@@ -71,9 +75,11 @@ def show_phones(name, book: AddressBook):
     record = book.find(name)
     if record:
         phones = [phone.value for phone in record.phones]
-        return f'✅   {Fore.GREEN}numbers of name {name} is {phones}.{Style.RESET_ALL}'
-    else: 
-        return record if record is  not None else ""
+        return f"✅   {Fore.GREEN}numbers of name {name} is {phones}.{Style.RESET_ALL}"
+    else:
+        return record if record is not None else ""
+
+
 @input_error
 def remove_phone(args, book: AddressBook):
     name, phone = args
@@ -84,7 +90,7 @@ def remove_phone(args, book: AddressBook):
             if el.value == phone:
                 record.remove_phone(phone)
                 return f'✅   {Fore.GREEN}phone "{phone}" is delete.{Style.RESET_ALL}'
-            else: 
+            else:
                 return f"⛔️   {Fore.RED}phone {phone} is not defined.{Style.RESET_ALL}"
 
 
@@ -101,6 +107,7 @@ def show_all(book: AddressBook):
     else:
         return f"⛔️   {Fore.RED}Book is empty.{Style.RESET_ALL}"
 
+
 @input_error
 def add_email(args, book: AddressBook):
     name, email = args
@@ -115,11 +122,10 @@ def add_birthday(args, book: AddressBook):
     record = book.find(name)
 
     try:
-        record.add_birthday(birthday_date)  
-        return f'✅ {Fore.GREEN}{birthday_date} added for name {name}.{Style.RESET_ALL}'
+        record.add_birthday(birthday_date)
+        return f"✅ {Fore.GREEN}{birthday_date} added for name {name}.{Style.RESET_ALL}"
     except ValueError as e:
-        return f'⛔️ {e}'
-
+        return f"⛔️ {e}"
 
 
 @input_error
@@ -127,15 +133,18 @@ def show_birthday(name, book: AddressBook):
     record = book.find(name)
     if record:
         birthday = record.birthday.value
-        return f'✅   {Fore.GREEN}Birthday of {name} is {birthday}.{Style.RESET_ALL}'
+        return f"✅   {Fore.GREEN}Birthday of {name} is {birthday}.{Style.RESET_ALL}"
     return f"⛔️   {Fore.RED}Birthday of {name} is not found.{Style.RESET_ALL}"
-   
+
 
 @input_error
-def show_reminder(book):
-    if book.get_upcoming_birthdays():
-        return book.get_upcoming_birthdays()
-    return f"⛔️   {Fore.RED}No reminders for this week.{Style.RESET_ALL}"
+def show_reminder(args, book: AddressBook):
+    days, *_ = args
+    birthdays = book.get_upcoming_birthdays(int(days or 7))
+
+    if len(birthdays):
+        return birthdays
+    return f"⛔️   {Fore.RED}No birthdays for this week.{Style.RESET_ALL}"
 
 
 @input_error
@@ -143,10 +152,11 @@ def save_data(book, filename="addressbook.pkl"):
     with open(filename, "wb") as f:
         pickle.dump(book, f)
 
+
 @input_error
 def load_data(filename="addressbook.pkl"):
     try:
         with open(filename, "rb") as f:
             return pickle.load(f)
     except FileNotFoundError:
-        return AddressBook()  
+        return AddressBook()

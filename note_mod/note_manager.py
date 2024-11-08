@@ -19,7 +19,7 @@ class NotesManager:
 
         note = Note(author, title, text, tags)
         self.notes.append(note)
-        return f"✅   {Fore.GREEN}Note \"{title}\" successfully added{Style.RESET_ALL}"
+        return f'✅   {Fore.GREEN}Note "{title}" successfully added{Style.RESET_ALL}'
 
     @input_error
     def show_all_notes(self):
@@ -28,12 +28,14 @@ class NotesManager:
 
         result = ["\nNOTES"]
         result.append(
-            f"{'#':<4} {'Author':<15} {'Title':<20} {'Description':<40} {'Tags':<15} {'Created'}")
+            f"{'#':<4} {'Author':<15} {'Title':<20} {'Description':<40} {'Tags':<15} {'Created'}"
+        )
         result.append("-" * 100)
 
         for idx, note in enumerate(self.notes, 1):
             result.append(
-                f"{idx:<4} {note.author:<15} {note.title:<20} {note.text:<40} {note.tags:<15} {note.created}")
+                f"{idx:<4} {note.author:<15} {note.title:<20} {note.text:<40} {note.tags:<15} {note.created}"
+            )
 
         return "\n".join(result)
 
@@ -46,10 +48,12 @@ class NotesManager:
         search_term = search_term.lower()
 
         for note in self.notes:
-            if (search_term in note.title.lower() or
-                search_term in note.text.lower() or
-                search_term in note.author.lower() or
-                    search_term in note.tags.lower()):
+            if (
+                search_term in note.title.lower()
+                or search_term in note.text.lower()
+                or search_term in note.author.lower()
+                or search_term in note.tags.lower()
+            ):
                 found_notes.append(note)
 
         if not found_notes:
@@ -57,12 +61,14 @@ class NotesManager:
 
         result = ["\nFound Notes:"]
         result.append(
-            f"{'#':<4} {'Author':<15} {'Title':<20} {'Description':<40} {'Tags':<15} {'Created'}")
+            f"{'#':<4} {'Author':<15} {'Title':<20} {'Description':<40} {'Tags':<15} {'Created'}"
+        )
         result.append("-" * 100)
 
         for idx, note in enumerate(found_notes, 1):
             result.append(
-                f"{idx:<4} {note.author:<15} {note.title:<20} {note.text:<40} {note.tags:<15} {note.created}")
+                f"{idx:<4} {note.author:<15} {note.title:<20} {note.text:<40} {note.tags:<15} {note.created}"
+            )
 
         return "\n".join(result)
 
@@ -80,7 +86,7 @@ class NotesManager:
             raise IndexError(f"Note number {idx + 1} not found")
 
         deleted_note = self.notes.pop(idx)
-        return f"✅   {Fore.GREEN}Note \"{deleted_note.title}\" successfully deleted{Style.RESET_ALL}"
+        return f'✅   {Fore.GREEN}Note "{deleted_note.title}" successfully deleted{Style.RESET_ALL}'
 
 
 @input_error

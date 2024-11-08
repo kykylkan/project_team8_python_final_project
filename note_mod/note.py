@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Note:
     def __init__(self, author, title, text, tags=None):
         self.author = author
