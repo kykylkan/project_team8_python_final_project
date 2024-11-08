@@ -1,3 +1,4 @@
+from tabulate import tabulate
 from colorama import Fore, Back, Style
 from check_classes.email import Email
 from check_classes.name import Name
@@ -68,7 +69,9 @@ class Record:
 
 
 
-    def __repr__(self):
-        birthday_str = f", birthday: {self.birthday.strftime('%d.%m.%Y')}" if self.birthday else ", birthday: -- "
-        email_str = f", email: {self.email.value}" if self.email else ",  email: -- "
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}{birthday_str}{email_str}"
+    def __str__(self):
+        phones_str = ", ".join(p.value for p in self.phones) if self.phones else "N/A"
+        birthday_str = self.birthday.strftime('%d.%m.%Y') if self.birthday else "N/A"
+        email_str = self.email.value if self.email else "N/A"
+
+        return f"{self.name.value:<10} {phones_str:<30} {birthday_str:<15} {email_str:<30}"

@@ -72,7 +72,8 @@ def show_phones(name, book: AddressBook):
     if record:
         phones = [phone.value for phone in record.phones]
         return f'✅   {Fore.GREEN}numbers of name {name} is {phones}.{Style.RESET_ALL}'
-    
+    else: 
+        return record if record is  not None else ""
 @input_error
 def remove_phone(args, book: AddressBook):
     name, phone = args
@@ -92,7 +93,11 @@ def show_all(book: AddressBook):
     result = [f"{record}" for _, record in book.data.items()]
 
     if result:
-        return result
+        header = f"{'Name':<10} {'Phone':<30} {'Birthday':<15} {'Email':<30}"
+        separator = "-" * 85
+
+        return f"{header}\n{separator}\n" + "\n".join(result)
+
     else:
         return f"⛔️   {Fore.RED}Book is empty.{Style.RESET_ALL}"
 
