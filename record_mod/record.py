@@ -56,7 +56,6 @@ class Record:
         birthday = Birthday(birthday_value).check_birthday()
         if birthday:
             self.birthday = birthday
-            print(self.birthday)
 
     def __str__(self):
         phones_str = ", ".join(p.value for p in self.phones) if self.phones else "N/A"

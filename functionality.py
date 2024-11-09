@@ -23,7 +23,7 @@ def input_error(func):
         except KeyError as e:
             return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
         except ValueError as e:
-            return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
+            return f"⛔️   {Fore.RED}Give me the correct data please.{Style.RESET_ALL}"
         except IndexError as e:
             return f"⛔️   {Fore.RED}{e}.{Style.RESET_ALL}"
         except Exception as e:
@@ -71,7 +71,8 @@ def change_number(args, book: AddressBook):
 
 
 @input_error
-def show_phones(name, book: AddressBook):
+def show_phones(args, book: AddressBook):
+    name, *_ = args
     record = book.find(name)
     if record:
         phones = [phone.value for phone in record.phones]
