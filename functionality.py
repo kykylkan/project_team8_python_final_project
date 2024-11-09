@@ -71,7 +71,8 @@ def change_number(args, book: AddressBook):
 
 
 @input_error
-def show_phones(name, book: AddressBook):
+def show_phones(args, book: AddressBook):
+    name, *_ = args
     record = book.find(name)
     if record:
         phones = [phone.value for phone in record.phones]

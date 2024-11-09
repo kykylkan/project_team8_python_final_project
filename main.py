@@ -48,8 +48,6 @@ def main():
         "all_contacts",
         "add_email",
         "add_birthday",
-        "show_birthday",
-        "reminder",
         "birthdays",
         "add-note",
         "all-notes",
@@ -68,6 +66,7 @@ def main():
         user_input = prompt(
             "Enter a command: >>> ", style=style, completer=command_completer
         )
+
 
         print("\n " * 2)
 
@@ -99,7 +98,7 @@ def main():
             print(change_number(args, book))
 
         elif command == "find_phone":
-            print(show_phones(args[0], book))
+            print(show_phones(args, book))
 
         elif command == "all_contacts":
             print(show_all(book))
