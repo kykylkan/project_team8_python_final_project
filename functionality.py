@@ -140,11 +140,20 @@ def show_birthday(name, book: AddressBook):
 
 @input_error
 def show_reminder(book: AddressBook, days = 7):
-    birthdays = book.get_upcoming_birthdays(int(days))
+    result = book.get_upcoming_birthdays(int(days))
 
-    if len(birthdays):
-        return birthdays
-    return f"⛔️   {Fore.RED}No birthdays for this week.{Style.RESET_ALL}"
+    if result:
+        header = f"{'Name':<10} {'Birthday':<15}"
+        separator = "-" * 25
+
+        return f"{header}\n{separator}\n" + result
+
+    else:
+        return f"⛔️   {Fore.RED}Birthdays not found.{Style.RESET_ALL}"
+
+    # if len(birthdays):
+    #     return birthdays
+    # return f"⛔️   {Fore.RED}No birthdays for this week.{Style.RESET_ALL}"
 
 
 @input_error

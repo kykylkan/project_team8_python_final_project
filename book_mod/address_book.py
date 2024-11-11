@@ -55,10 +55,7 @@ class AddressBook(UserDict):
                         congratulation_date, "%d.%m.%Y"
                     )
                     reminder.append(
-                        {
-                            "name": contact.name.value,
-                            "congratulation_date": congratulation_date_str,
-                        }
+                        f"{contact.name.value:<10} {congratulation_date_str:<30}"
                     )
 
-        return reminder
+        return "\n".join(reminder)
